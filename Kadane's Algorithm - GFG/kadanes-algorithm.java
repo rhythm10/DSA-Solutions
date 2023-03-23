@@ -1,6 +1,8 @@
 //{ Driver Code Starts
 import java.io.*;
 
+import java.util.*;
+
 class Main {
     
 	public static void main (String[] args) throws IOException {
@@ -37,21 +39,24 @@ class Solution{
     long maxSubarraySum(int arr[], int n){
         
         // Your code here
-        long sum=0,cur=Integer.MIN_VALUE;
-        for(int i=0;i<arr.length;i++)
-        {
-            sum += arr[i];
-            if(cur < sum)
-            {
-                cur = sum;
-            }
-            if(sum < 0)
-            {
-                sum = 0;
-            }
-        }
-        return cur;
         
+        long sum_till_now=0;
+        long max_till_now=-999;
+        
+        for(long i=0;i<n;i++)
+        {
+            sum_till_now += arr[(int)i];
+            if(max_till_now < sum_till_now)
+            {
+                max_till_now = sum_till_now;
+            }
+            if(sum_till_now < 0)
+            {
+                sum_till_now = 0;
+            }
+            
+        }
+        return max_till_now;
     }
     
 }
