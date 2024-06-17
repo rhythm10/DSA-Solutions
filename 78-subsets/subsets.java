@@ -1,23 +1,22 @@
-import java.util.ArrayList;
-import java.util.List;
-
 class Solution {
     public List<List<Integer>> subsets(int[] nums) {
-        List<List<Integer>> ans = new ArrayList<>();
-        List<Integer> output = new ArrayList<>();
-        solve(nums, 0, ans, output);
-        return ans;
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> tempres = new ArrayList<>();
+
+        sub(0, nums.length, nums, tempres, res);
+        return res;
     }
 
-    public void solve(int[] nums, int i, List<List<Integer>> ans, List<Integer> temp) {
-        if (i >= nums.length) {
-            ans.add(new ArrayList<>(temp));
+    public void sub(int i, int n, int[] arr, List<Integer> tempres, List<List<Integer>> res) {
+        if(i == n) {
+            res.add(new ArrayList<>(tempres));
             return;
         }
+        tempres.add(arr[i]);
+        sub(i+1, n, arr, tempres, res);
 
-        temp.add(nums[i]);
-        solve(nums, i + 1, ans, temp);
-        temp.remove(temp.size() - 1);
-        solve(nums, i + 1, ans, temp);
+        tempres.remove(tempres.size() - 1);
+        sub(i+1, n, arr, tempres, res);
+
     }
 }
