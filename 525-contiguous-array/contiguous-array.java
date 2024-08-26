@@ -5,17 +5,21 @@ class Solution {
     }
 
     public int optimal(int[] nums) {
-        int n = nums.length;
-        int sum = 0;
+        int n = nums.length - 1;
         HashMap<Integer, Integer> hm = new HashMap<>();
-        int maxi = 0;
-        hm.put(0, -1);
-        for(int i=0;i<n;i++){
-            sum += nums[i] == 0 ? -1 : 1;
-            if(hm.containsKey(sum)) {
-                maxi = Math.max(maxi, i - hm.get(sum));
+        int maxi = 0, sum =0;
+
+        for(int i=0;i<=n;i++) {
+            sum += (nums[i] == 0) ? -1 : 1;
+            
+            if (sum == 0) {
+                maxi = Math.max(maxi, i + 1); // Update maxi if sum is zero from index 0
+            }
+
+            if (hm.containsKey(sum)) {
+                maxi = Math.max(maxi, i - hm.get(sum)); // Length of subarray
             } else {
-                hm.put(sum, i);
+                hm.put(sum, i); // Store the index of the first occurrence of this sum
             }
         }
 
