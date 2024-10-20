@@ -1,13 +1,8 @@
 class Solution {
     public int fib(int n) {
-        return fibb(n);
-    }
-
-    public int fibb(int n) {
-        if(n <= 1) {
+        if(n<=1) {
             return n;
         }
-        return fibb(n-1) + fibb(n-2);
-
+        return fib(n-1) + fib(n-2);
     }
 }
